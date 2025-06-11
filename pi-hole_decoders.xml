@@ -27,12 +27,20 @@ January 10 00:00:00 dnsmasq[53]: query[SOA] local from 192.168.0.2
 January 10 00:00:00 dnsmasq[53]: query[SRV] example.com from 192.168.0.2
 January 10 00:00:00 dnsmasq[53]: query[SRV] example.com from 192.168.0.2
 January 10 00:00:00 dnsmasq[53]: query[SVCB] _dns.resolver.arpa from 192.168.0.2
+May 14 00:00:00 dnsmasq[53]: query 1-courier.push.apple.com from 100.65.165.92
 -->
 
 <decoder name="dnsmasq-fields">
   <parent>dnsmasq</parent>
   <regex type="pcre2">(query)\[(\S+)\] (\S+) from 192.168.0.2
   <order>action, query_type, data, srcip</order>
+</decoder>
+
+
+<decoder name="dnsmasq-fields">
+  <parent>dnsmasq</parent>
+  <regex type="pcre2">(query) (\S+) from (\S+)</regex>
+  <order>action, data, srcip</order>
 </decoder>
 
 <!--
